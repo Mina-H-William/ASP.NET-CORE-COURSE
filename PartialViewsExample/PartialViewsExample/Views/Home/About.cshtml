@@ -1,0 +1,14 @@
+﻿<h1>About</h1>
+
+<h3> About Company Here</h3>
+
+
+@*return content to the parent View*@
+@* @await Html.PartialAsync("_ListPartialView")
+
+
+@{
+    await Html.RenderPartialAsync("_ListPartialView");
+    //Straems the content to the browser
+    // best for performance for large content
+} *@

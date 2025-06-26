@@ -1,0 +1,6 @@
+{
+  "weatherapi": {
+    "ClientID": "client id from MyOwnConfig",
+    "ClientSecret": "client secret from MyOwnConfig"
+  }
+}

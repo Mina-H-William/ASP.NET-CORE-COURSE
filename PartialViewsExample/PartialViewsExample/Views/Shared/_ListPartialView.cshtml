@@ -1,0 +1,27 @@
+﻿@model ListModel
+
+@* <div class="list-container">
+
+    @{
+        ViewBag.ListTitle = "updated";
+    }
+
+    <h3>@ViewBag.ListTitle</h3>
+    <ul class="list">
+        @foreach(string city in ViewBag.ListItems)
+            {
+                <li>@city</li>
+            }
+    </ul>
+</div> *@
+
+<div class="list-container">
+    <h3>@Model.ListTitle</h3>
+    <ul class="list">
+        @foreach (string city in Model.ListItems)
+        {
+            <li>@city</li>
+        }
+    </ul>
+</div>
+

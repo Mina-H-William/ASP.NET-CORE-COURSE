@@ -1,0 +1,89 @@
+﻿@* @using ViewsExample.Models *@
+
+
+@{
+    // string appTitle = "Asp.Net Core Demo App";
+    Person person = new Person() { Name = "Mina", DateOfBirth = Convert.ToDateTime("2002-09-30"),gender=Gender.Male };
+
+    // List<Person> people = new List<Person>()
+    // {
+    //     new Person() { Name = "Mina", DateOfBirth = Convert.ToDateTime("2002-09-30"),gender=Gender.Male },
+    //     new Person() { Name = "Hany", DateOfBirth = Convert.ToDateTime("2010-09-30"),gender=Gender.Other },
+    //     new Person() { Name = "William", DateOfBirth = Convert.ToDateTime("2015-09-30"),gender=Gender.Female }
+    // };
+
+    var people = (List<Person>?)ViewData["people"];
+}
+
+@{
+    // local function access only within this view 
+    double? GetAge(DateTime? DateofBirth)
+    {
+        if(DateofBirth is not null)
+        {
+            return Math.Round((DateTime.Now - DateofBirth.Value).TotalDays / 365.25);
+        }
+        return null;
+    }
+}
+
+@{
+    // string AlertMessage = $"<script>(alert('{people.Count} people found')</script>";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["appTitle"]</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    @*Html.Raw used to excute html tags or javascript inside strings *@
+    @* @Html.Raw(AlertMessage) *@
+    <h1>Welcome</h1>
+    <h2> Hello @person.Name</h2>
+    @{
+        //if else
+        if(person.DateOfBirth.HasValue)
+        {
+            // double age = Math.Round((DateTime.Now - person.DateOfBirth).Value.TotalDays / 365.25);
+            double? age = GetAge(person.DateOfBirth);
+            <h3> Age is:@age.Value years old</h3>
+        }
+        else
+        {
+            <h3> Date of birth is unknown</h3>
+        }
+
+        //switch Case
+        switch (person.gender)
+        {
+            case Gender.Male:
+                <p> Novemeber 19 is International Men's Day</p>
+                break;
+
+            case Gender.Female:
+                <p> March 8 is International Men's Day</p>
+                break;
+            case Gender.Other:
+                <p> March 31 is International Transgender's Day</p>
+                break;
+            default:
+                <p> d5l data s7 yahh</p>
+                break;
+        }
+
+        //Froeach or for
+        foreach(var i in Enumerable.Range(0,5))
+        {
+            // to add text without any tag in Razor code @{} use <text> </text> (work only in Razor)
+            //<text>Hello to</text>
+            // or use ( @: ) take only one line as plain text
+            //@: Hello to
+            <h3> for i = @i</h3>
+        }
+
+
+    }
+</body>
+</html>

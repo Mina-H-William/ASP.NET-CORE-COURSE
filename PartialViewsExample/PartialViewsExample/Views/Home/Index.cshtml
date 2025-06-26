@@ -1,0 +1,64 @@
+﻿<h1>Home</h1>
+
+@* @{
+    ListModel MyList = new ListModel()
+            {
+                ListTitle = "Cities",
+                ListItems = new List<string>()
+                {
+                    "London",
+                    "Egypt",
+                    "Alex",
+                    "Rome"
+                },
+            };
+}
+
+<partial name="_ListPartialView" model="MyList"/> *@
+
+
+@* @{
+    // this created to take a specifc daata to partial view not all view data
+    var myViewData = new ViewDataDictionary(ViewData);
+
+    myViewData["ListTitle"] = "Countries";
+
+    myViewData["ListItems"] = new List<string>()
+            {
+                "Usa",
+                "Africa",
+                "Uk",
+                "Alex"
+            };
+}
+
+<div class="box">
+    <partial name="_ListPartialView" view-data="myViewData"/>
+</div>
+
+@{
+//Viewbag.ListTile updated in partial view but it will afect only partial view not main view as partial view take a copy of view data
+}
+<h3>List Title (updated in partial view): @ViewBag.ListTitle</h3> *@
+
+
+<button class="button button-blue-back" type="submit" id="button-load">Load Programming Languages</button>
+
+<div class="box programming-language-content" hidden></div>
+
+@section Scripts{
+    <script>
+        // document.getElementById("button-load")
+        document.querySelector("#button-load").addEventListener("click",async () => {
+            // use this ${window.location.pathname} to get the current path and add the route you want to it
+            // in asp.net when fetch in javascript it always by default call the url from origin root
+            var response = await fetch(`programming-languages`);
+            var languages = await response.text();
+
+            document.querySelector(".programming-language-content").hidden = false;
+
+            document.querySelector(".programming-language-content").innerHTML = languages;
+
+        });
+    </script>
+}

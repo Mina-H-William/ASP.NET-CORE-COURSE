@@ -1,0 +1,16 @@
+command: dotnet run 
+
+(run application) (should be written in the folder of the project, not solution, where is .csproj found)
+
+
+command: dotnet run --no-launch-profile 
+
+( to run app without reading launchSetting.json) (launchSetting by default run if found in project)
+
+(if no launchsetting the app by default run on production Environment)
+
+
+
+command: $Env:ASPNETCORE_ENVIRONMENT="Staging" (to set eviroment variables) (these are local for powershell tap)
+
+Then run dotnet run to run the app, and it takes this variable for the environment
