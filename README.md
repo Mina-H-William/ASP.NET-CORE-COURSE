@@ -1,20 +1,21 @@
 **📚 My ASP.NET Core Learning Journey**
+
 This repository documents my hands-on exploration of ASP.NET Core, including:
 
-Fundamentals: MVC, Razor Pages, Web API, Entity Framework Core, Unit Testing with Mocking
+Fundamentals: MVC, Razor Pages, Web API, Entity Framework Core, Unit Testing
 
 Advanced Topics: Authentication (JWT, Identity), CQRS, Clean Architecture (IN Future)
 
 Real-World Patterns: Repository Pattern, Unit of Work, Dependency Injection
 
 **🚀 Featured Project: CRUDExample**
-One of my flagship projects where I applied key concepts:
-✅ Full CRUD Operations with EF Core
-✅ Razor Pages for dynamic UI
-✅ Repository Pattern for clean data access
-✅ Input Validation & Error Handling
-✅ Unit Testing using Xunit PAckage
-✅ Read and Write Data in Excel and csv Files
+
+✅ **Full CRUD Operations** with EF Core  
+✅ **Razor Pages** for dynamic UI  
+✅ **Repository Pattern** for clean data access  
+✅ **Input Validation & Error Handling**  
+✅ **Unit Testing** using xUnit Package  
+✅ **Read/Write Data** in Excel and CSV files  
 
 "This project encapsulates my progression—from basics to structured, scalable solutions."
 
