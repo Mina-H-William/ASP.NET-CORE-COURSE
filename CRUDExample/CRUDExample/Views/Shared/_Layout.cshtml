@@ -11,11 +11,17 @@
 </head>
 <body>
     <div class="container">
-        <div class="navbar">
-            <div class="navbar-brand">CRUD DEMO</div>
+        <div class="navbar" style="display:flex;">
+            <div class="navbar-brand" style="display:flex;">
+                @*asp-append-version="true" it insure that when img change it will be updataed not used the cashed one*@
+                @*this by adding a hash code to the link of img /img?v={hash} and when img change the hash change so*@
+                @*cashed will not taken*@
+                <img src="~/logo.png" width="35px" asp-append-version="true" />
+            </div>
             <ul>
                 <li>
-                    <a href="~/persons/index">Persons</a>
+                    <a asp-action="index" asp-controller="persons">Persons</a>
+                    <a asp-action="UploadFromExcel" asp-controller="Countries">Upload Countries</a>
                 </li>
             </ul>
         </div>
@@ -23,6 +29,6 @@
             @RenderBody()
         </div>
     </div>
-    @RenderSection("Scripts",false);
+    @RenderSection("Scripts",false)
 </body>
 </html>

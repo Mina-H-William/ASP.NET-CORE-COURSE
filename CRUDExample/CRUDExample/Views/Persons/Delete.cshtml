@@ -1,0 +1,100 @@
+﻿@model PersonResponse
+@{
+    ViewBag.Title = "Delete Person";
+}
+
+@{
+    //**********************************************************************************************/////
+    // if current route with parameters is the same one i will request it with no parameters using tag heplers 
+    // (asp-for and as-controller) so tag helpers will add parameters from previous route automatically so to avoid this
+    // use (action="~/route") or override paramter by using asp-route-{parameterName}="value"
+    //**********************************************************************************************/////
+}
+
+<a asp-controller="Persons" asp-action="Index" class="link-hover">Back to Persons List</a>
+
+<h2>Delete Person</h2>
+
+<div class="center-box">
+    <form asp-action="delete" asp-controller="persons" method="post">
+
+        <input type="hidden" asp-for="PersonID" />
+        @*Person Name*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="PersonName" class="form-label pt">Person Name</label>
+            </div>
+            <div class="flex-1">
+                <input class="form-input" asp-for="PersonName" disabled/>
+                <span asp-validation-for="PersonName" class="text-red"></span>
+            </div>
+            @{
+                // for validation errors (Tag Helpers EX: asp-for) <span asp-validation-for="PersonName" class="text-red"></span>
+            }
+        </div>
+
+        @*Email*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="Email" class="form-label pt">Email</label>
+            </div>
+            <div class="flex-1">
+                @*by Default asp-for="Email" will make type="text" so to make it email (overWrite it by write type="email")*@
+                @*or by use attribute DataType(DataType.EmailAddress) in model or DTO (PersonAddRequest)*@
+                <input class="form-input" asp-for="Email" type="email" disabled/>
+                <span asp-validation-for="Email" class="text-red"></span>
+            </div>
+            @{
+                // for validation errors <span asp-validation-for="Email" class="text-red"></span>
+            }
+        </div>
+
+        @*Submit button*@
+        <div class="form-field flex">
+            <div class="w-25">
+            </div>
+            <div class="flex-1">
+                <button id="delete" class="button button-red-back">Delete</button>
+                <button type="submit" id="confirm" class="button button-red-back" hidden>Confirm</button>
+                <button id="cancel" class="button button-red-back" hidden>Cancel</button>
+                <span id="warningMessage" class="text-red mt" hidden>Are you Sure to Delete This person: @Model.PersonName</span>
+                <div asp-validation-summary="All" class="text-red"></div>
+                @if (ViewBag.Errors != null)
+                {
+                    <div class="text-red ml">
+                        <ul>
+                            @foreach (string error in ViewBag.Errors)
+                            {
+                                <li class="ml">@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script>
+        var confirmbutton = document.querySelector("#confirm");
+        var cancelbutton = document.querySelector("#cancel");
+        var deletebutton = document.querySelector("#delete");
+        deletebutton.addEventListener("click", function (e) {
+            e.preventDefault(); // to prevent form submit
+            confirmbutton.hidden = false; // show confirm button
+            cancelbutton.hidden = false; // show cancel button
+            deletebutton.hidden = true; // hide delete button
+            document.querySelector("#warningMessage").hidden = false; // show warning message
+        });
+
+        cancelbutton.addEventListener("click", function (e) {
+            e.preventDefault(); // to prevent form submit
+            confirmbutton.hidden = true;
+            cancelbutton.hidden = true; 
+            deletebutton.hidden = false;
+            document.querySelector("#warningMessage").hidden = true; // show warning message
+        });
+
+    </script>
+}

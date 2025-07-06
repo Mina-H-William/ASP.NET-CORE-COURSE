@@ -7,11 +7,15 @@
 }
 @*when submiting form with get -> so data go to url as query string but if method post -> data got o body *@
 @* for from tags if use action -> take full url if use (Tag Helpers) asp-action -> action name,asp-controller,asp-area *@
-<form action="~/persons/index" method="get">
+<form asp-action="Index" asp-controller="Persons" method="get">
     @*Example: searchBy=PersonName&searchString=abc*@
     <h1>Persons</h1>
 
-    <a href="~/persons/create">Create Person</a>
+    <a asp-controller="Persons" asp-action="Create">Create Person</a>
+    <br />
+    <a asp-controller="Persons" asp-action="PersonsPDF">Download as PDF</a>
+    <a asp-controller="Persons" asp-action="PersonsCSV" class="ml">Download as CSV</a>
+    <a asp-controller="Persons" asp-action="PersonsExcel" class="ml">Download as EXCEL</a>
 
     <div class="box flex">
         <div class="flex-1">
@@ -37,7 +41,7 @@
 
         <div class="flex-1">
             <button class="button button-blue-back">Search</button>
-            <a href="~/persons/index" class="link-hover">Clear all</a>
+            <a asp-controller="Persons" asp-action="Index" class="link-hover">Clear all</a>
         </div>
     </div>
 
@@ -84,20 +88,25 @@
                     { "ColumnName", nameof(PersonResponse.ReciveNewsLetters) },
                                 { "DisplayName", "Receive News Letters" },
                                 })
+                                <th>Options</th>
             </tr>
         </thead>
         <tbody>
             @foreach (PersonResponse person in Model)
             {
                 <tr>
-                    <td style="width:13%">@person.PersonName</td>
-                    <td style="width:15%">@person.Email</td>
+                    <td style="width:12%">@person.PersonName</td>
+                    <td style="width:12%">@person.Email</td>
                     <td style="width:10%">@person.DateOfBirth?.ToString("dd MMM yyyy")</td>
                     <td style="width:8%">@person.Age</td>
                     <td style="width:8%">@person.Gender</td>
                     <td style="width:10%">@person.Country</td>
-                    <td style="width:13%">@person.Address</td>
-                    <td style="width:8%">@(person.ReciveNewsLetters ? "Yes" : "No")</td>
+                    <td style="width:10%">@person.Address</td>
+                    <td style="width:10%">@(person.ReciveNewsLetters ? "Yes" : "No")</td>
+                    <td style="width:10%">
+                        <a asp-controller="persons" asp-action="edit" asp-route-personID="@person.PersonID">Edit</a>
+                        <a asp-controller="persons" asp-action="delete" asp-route-personID="@person.PersonID">Delete</a>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -11,7 +11,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\RepositoryContracts\RepositoryContracts.csproj" />
     <ProjectReference Include="..\ServiceContracts\ServiceContracts.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>

@@ -15,12 +15,15 @@ namespace ServiceContracts.DTO
 
         [Required]
         [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
 
         public GenderOptions? Gender { get; set; }
 
+        [Required]
         public Guid? CountryID { get; set; }
 
         public string? Address { get; set; }

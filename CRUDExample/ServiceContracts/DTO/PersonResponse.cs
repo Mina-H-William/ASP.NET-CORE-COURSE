@@ -26,6 +26,8 @@ namespace ServiceContracts.DTO
 
         public bool ReciveNewsLetters { get; set; }
 
+        public string? TIN { get; set; }
+
         public override bool Equals(object? obj)
         {
             if (obj is null) return false;
@@ -85,7 +87,9 @@ namespace ServiceContracts.DTO
                 ReciveNewsLetters = person.ReciveNewsLetters,
                 Age = (person.DateOfBirth != null) ?
                       Math.Round((DateTime.Now - person.DateOfBirth.Value).TotalDays / 365.25)
-                      : null
+                      : null,
+                TIN = person.TIN,
+                Country = person.Country?.CountryName ?? string.Empty
             };
         }
     }

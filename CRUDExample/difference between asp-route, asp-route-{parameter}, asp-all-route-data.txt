@@ -1,0 +1,53 @@
+Attribute				Purpose	Syntax			Best For
+
+asp-route				Named route			asp-route="Route Name"
+asp-all-route-data			Multiple dynamic parameters	asp-all-route-data="dictionary"
+asp-route-{parameter Name}		Individual parameters		asp-route-paramname="value
+
+-----------------------------------------------------------------------------------------------------------
+
+asp-route -> used when define a named pattern in program.cs 
+
+EXAMPLE:
+
+app.MapControllerRoute(
+    name: "product_details",
+    pattern: "products/{id}",
+    defaults: new { controller = "Products", action = "Details" });
+
+<a asp-route="product_details" asp-route-id="5">Product 5</a>
+
+-----------------------------------------------------------------------------------------------------
+
+asp-all-route-data -> to  specify all route parameters in one dictionary 
+
+EXAMPLE:
+
+@{
+    var extraParams = new Dictionary<string, string>
+    {
+        { "sort", "price" },
+        { "page", "2" }
+    };
+}
+
+<a asp-route="search_results" 
+   asp-route-category="books"
+   asp-all-route-data="extraParams">
+    Search Books
+</a>
+
+--------------------------------------------------------------------------------------------------
+
+asp-route-{} ->
+First Checks Route Parameters:
+
+Looks at your route template (e.g., "products/{id}/{category?}")
+
+If the parameter name matches a route parameter (like id or category in this example), it puts the value in the route path
+
+Falls Back to Query String:
+
+If the parameter name doesn't match any route parameter, it automatically adds it as a query string parameter
+
+For example, asp-route-page="2" would become ?page=2 if "page" isn't a route parameter
