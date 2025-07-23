@@ -1,0 +1,23 @@
+DI Scopes and lifetime ----------> 
+
+Singleton: Creates only one object for all Calls
+
+Scoped: new object for each request 
+
+Transient: Each call creates a new object
+
+
+
+--------------------------------------------------------------------------------------------------------------
+
+Singleton services (lifetime: entire app) should not depend on Transient services (lifetime: per request).
+
+Why? If a Singleton injects a Transient, the Transient becomes de facto Singleton (captured for the Singleton’s lifetime), which can lead to:
+
+State corruption (e.g., the Transient holds request-specific data).
+
+Allowed:
+
+Transient/Scoped services can depend on Singletons safely.
+
+Why? Singletons are thread-safe by design (if properly implemented) and live forever, so no lifetime mismatch.

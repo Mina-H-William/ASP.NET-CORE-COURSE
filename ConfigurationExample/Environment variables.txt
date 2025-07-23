@@ -1,0 +1,11 @@
+in powershell Terminal
+
+# Set for current PowerShell session only
+$env:ConnectionStrings__DefaultConnection = "Server=myServer;Database=myDB;User Id=myUser;Password=myPass;"
+
+
+# Set permanently for current user
+[System.Environment]::SetEnvironmentVariable("ConnectionStrings__DefaultConnection", "Server=myServer;Database=myDB;User Id=myUser;Password=myPass;", "User")
+
+# Set permanently for current user
+[System.Environment]::SetEnvironmentVariable("ConnectionStrings__DefaultConnection", "Server=myServer;Database=myDB;User Id=myUser;Password=myPass;", "User")

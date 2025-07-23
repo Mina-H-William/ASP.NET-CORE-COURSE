@@ -1,0 +1,41 @@
+**SOLID Principles**
+
+SOLID is an acronym representing five key principles of object-oriented design:
+
+1- Single Responsibility Principle (SRP):
+
+- A class should have only one reason to change.
+
+- Promotes focused and maintainable classes.
+
+2- Open/Closed Principle (OCP):
+
+- Software entities should be open for extension but closed for modification.
+
+- Encourage adding new features without changing existing code.
+
+3- Liskov Substitution Principle (LSP):
+
+- Objects of a derived class should be substitutable for objects of the base class without affecting the correctness of the program.
+
+- Ensures that inheritance relationships are used appropriately.
+
+4- Interface Segregation Principle (ISP)
+
+- Clients should not be forced to depend on interfaces they do not use.
+
+- Promotes smaller, more focused interfaces.
+
+5- Dependency Inversion Principle (DIP)
+
+- High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
+- Abstractions should not depend on details. Details should depend on abstractions.
+
+- Encourages loose coupling and flexibility.
+
+
+
+
+
+

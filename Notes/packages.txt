@@ -1,0 +1,107 @@
+Schema:
+Package Name:      Usage of it 
+
+Udemy Course:
+
+Microsoft.EntityFrameworkCore.Design: Provides design-time tools for EF Core, such as migrations and scaffolding (Create migration).
+
+
+Microsoft.EntityFrameworkCore.SqlServer: Enables Entity Framework Core to work with SQL Server databases.
+
+
+Microsoft.EntityFrameworkCore.InMemory: A lightweight in-memory database provider for testing purposes in EF Core.
+
+
+Microsoft.EntityFrameworkCore.Tools: Adds commands like `dotnet ef migrations` for working with EF Core in CLI (run migration with command in package manger console).
+
+
+Rotativa.AspNetCore: Converts Razor views into PDF documents using wkhtmltopdf.
+
+
+Serilog: Structured logging framework for .NET.
+
+
+Serilog.AspNetCore: Integrates Serilog with ASP.NET Core logging infrastructure.
+
+
+Serilog.Sinks.MSSqlServer: Sends Serilog logs to a SQL Server database.
+
+
+Serilog.Sinks.Seq: Sends logs to Seq, a log server for structured log data.
+
+
+Serilog.Extensions.Hosting: Enables Serilog to hook into Microsoft.Extensions.Hosting (IDiagonsticContext).
+
+
+SerilogTimings: Provides easy timing/logging for operations to measure performance.
+
+
+AutoFixture: Automatically generates test data and objects for unit testing.
+
+
+EntityFrameworkCoreMock.Moq: Allows mocking EF Core DbContext with Moq in unit tests.
+
+
+Fizzler: Enables CSS selector-style querying over HTML documents.
+
+
+Fizzler.Systems.HtmlAgilityPack: Integrates Fizzler with HtmlAgilityPack for CSS-style HTML querying
+(Convert string to html and access html document in .NET like javascript (integration testing)).
+
+
+FluentAssertions: Offers more human-readable assertions for unit tests.
+
+
+Microsoft.AspNetCore.Mvc.Testing: Simplifies integration testing for ASP.NET Core apps.
+(WebApplicationFactory that uses program outside program.cs for integration test)
+
+
+Moq: Popular mocking library for unit testing in .NET (Mocking any class or service).
+
+
+Microsoft.AspNetCore.Http: Provides HTTP abstractions used in ASP.NET Core middleware and request handling.
+(for FormFile in classes)
+
+
+CsvHelper: Makes reading/writing CSV files fast and easy using strongly-typed classes.
+EPPlus: Reads and writes Excel files (XLSX) without needing Microsoft Office.
+
+
+
+Gates of Egypt:
+
+BCrypt.Net-Next:
+A .NET implementation of BCrypt for securely hashing and verifying passwords.
+(BCrypt.Net.BCrypt.HashPassword(request.Password))
+
+
+Npgsql.EntityFrameworkCore.PostgreSQL:
+Enables Entity Framework Core to work with PostgreSQL databases.
+
+Swashbuckle.AspNetCore:
+Generates Swagger UI and OpenAPI documentation for ASP.NET Core Web APIs.
+
+
+Microsoft.AspNetCore.Authentication.JwtBearer:
+Provides JWT (JSON Web Token) authentication for ASP.NET Core APIs.
+(Needed if you're securing your API using JWT tokens.)
+************
+(if installed this package no need for any identityModel.* packages as it inlcudes all)
+(gives access to those:
+{
+ Microsoft.IdentityModel.Tokens
+
+Microsoft.IdentityModel.JsonWebTokens
+
+System.IdentityModel.Tokens.Jwt
+}
+)
+************
+
+Microsoft.IdentityModel.JsonWebTokens:
+Low-level library for creating and reading JSON Web Tokens (used by JwtBearer).
+(Used internally by JwtBearer for parsing/creating tokens)
+
+Microsoft.IdentityModel.Tokens:
+Defines token-related classes like security keys, signing credentials, and validation parameters.
+(Required for signing and validating JWT tokens.)

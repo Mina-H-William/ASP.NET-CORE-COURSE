@@ -1,0 +1,25 @@
+The <InternalsVisibleTo> element in your .csproj file is a powerful feature that 
+enables friend assemblies in .NET.
+
+So add in .csproj file of project this 
+
+<ItemGroup>
+    <InternalsVisibleTo Include="{ProjectName}" />
+</ItemGroup>
+
+ex:
+
+<ItemGroup>
+    <InternalsVisibleTo Include="ContactsManager.IntegrationTests" />
+</ItemGroup>
+
+
+This grants your test project (ContactsManager.IntegrationTests) access to:
+
+internal types
+
+internal methods/properties
+
+internal classes
+...from the main project (ContactsManager), as if they were public.
+

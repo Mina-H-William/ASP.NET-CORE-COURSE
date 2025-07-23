@@ -7,7 +7,7 @@ namespace Repositories
 {
     public class CountriesRepository : ICountriesRepository
     {
-        readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
 
         public CountriesRepository(ApplicationDbContext db)
         {

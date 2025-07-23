@@ -1,0 +1,60 @@
+					******** Identity **********
+
+if we want to use identity user and role with the primary key of Guid so we should specify this in generic type
+
+EX: 
+
+ApplicationUser extend from IdentityUser<Guid>
+
+ApplicationRole extend from IdentityRole<Guid>
+
+
+				*******************DbContext********************
+
+
+and DbContext should implement IdentityDBContext<ApplicationUser, ApplicationRole, Guid> if using Guid 
+
+if we use default string as primary key so its enough to DBContext to implement IdentityDBContext
+
+
+
+				****************Configure Services*************
+
+To COnfigure identity we use Services.AddIdentity<ApplicationUser, ApplicationRole>()
+				     .addEntityFramworkStore<ApplicationDBcontext>()
+			   	     .AddDefaultTokenProviders() // for password reset, email confirmation, etc.
+
+addIdentity it Calls AddAuthentication() so no need to explicitly writing this
+
+its enough if using entity framework as it internally implement userstore and role store 
+
+if using a different database like mongodb or reddis which not supported by entityframework so we should
+
+implement custom UserStore and custom RoleStore and adding them to addidnetity like this
+
+.AddUserStore<Custom user Store>()
+.AddRoleStore<Custom Role Store>()
+
+or we want to implement custom functions of userstore or rolestore we also do this 
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

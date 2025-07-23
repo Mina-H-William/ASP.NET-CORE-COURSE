@@ -1,0 +1,72 @@
+Filters Order Execution:
+
+- Authorized Filter
+
+- Resource Filter (After)
+
+ Model Binding & Validation
+
+- Action Filter (Before)
+
+ action method
+
+- Action Filter (After)
+
+- Exception Filter
+
+- Always Run Result Filter (Before) (This always runs even if there is a short circuit in other filters)
+
+- Result Filter (Before)
+
+ IActionResult execution
+
+- Result Filter (After)
+
+- Always Run Result Filter (After)
+
+- Resource Filter (After)
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+
+Two Ways to Call Filter: 
+
+1- [TypeFilter(typeof(FilterName),arguments = new object[] {with same order in constructor})] // take arguments
+
+2- [ServiceFilter(typeof(FilterName))] // can't take any arguments
+
+To use service filter to call Filter you Must add filter as service in IOC Container (DI) and choose lifetime
+
+in case of type filter it always be transient and not required to add it in DI
+
+
+--------------------------------------------------------------------------------------------------------
+
+
+for action filter and result filter there is a class called ActionFilterAttribute that inherit from 
+
+Attribute, IActionFilter, IAsyncActionFilter, IResultFilter, IAsyncResultFilter, IOrderedFilter
+
+
+so if filter inherit from this class it can have implementation for both result and action filters 
+no need for add property Order as it exist in ActionFilterAttribute and when implement any function we should 
+use keyword override as them was implemented as virtual in ActionFilterAttribute
+
+(any class inherit from Attribute Class so we can use his name on any action or controller)
+
+**********************************************************
+
+difference between ActionFilterAttribute and IActionFiter:
+
+IActionFiter -> we can use services from IOC Container (DI), Require TypeFilter or ServiceFilter to call
+
+ActionFilterAttribute -> we Can't use Services from IOC Container (DI), can be called like any attribute
+
+**********************************************************
+
+
+
+
+

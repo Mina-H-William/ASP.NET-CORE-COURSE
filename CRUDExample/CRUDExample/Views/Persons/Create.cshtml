@@ -3,10 +3,23 @@
     ViewBag.Title = "Create Person";
 }
 
-<a asp-controller="Persons" asp-action="Index" class="link-hover">Back to Persons List</a>
-<h2>Create Person</h2>
+<div class="flex">
+    <div class="flex-1">
+        <div class="text-grey">
+            <span>Contacts</span>
+            <i class="fa-solid fa-caret-right"></i>
+            <span>Persons</span>
+            <i class="fa-solid fa-caret-right"></i>
+            <span>Create</span>
+        </div>
+    </div>
+</div>
 
-<div class="center-box">
+<div class="form-container">
+    <a asp-controller="Persons" asp-action="Index" class="link-hover">Back to Persons List</a>
+
+    <h2 class="text-large">Create Person</h2>
+
     <form asp-controller="Persons" asp-action="Create" method="post">
 
         @*Person Name*@

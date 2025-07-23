@@ -1,0 +1,7 @@
+The SQL Server package (Microsoft.EntityFrameworkCore.SqlServer) already includes the base Microsoft.EntityFrameworkCore package as a dependency
+
+When you install Microsoft.EntityFrameworkCore.SqlServer, it automatically brings in the core EF package
+
+You don't need to install Microsoft.EntityFrameworkCore separately
+
+

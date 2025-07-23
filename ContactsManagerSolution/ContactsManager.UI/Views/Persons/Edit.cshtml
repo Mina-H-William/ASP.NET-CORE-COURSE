@@ -1,0 +1,175 @@
+﻿@model PersonUpdateRequest
+@{
+    ViewBag.Title = "Edit Person";
+    ViewBag.CurrentUrl = "~/Persons/Edit";
+}
+
+@{
+    //**********************************************************************************************/////
+    // if current route with parameters is the same one i will request it with no parameters using tag heplers 
+    // (asp-for and as-controller) so tag helpers will add parameters from previous route automatically so to avoid this
+    // use (action="~/route") or override paramter by using asp-route-{parameterName}="value"
+    //**********************************************************************************************/////
+}
+
+
+<div class="flex">
+    <div class="flex-1">
+        <div class="text-grey">
+            <span>Contacts</span>
+            <i class="fa-solid fa-caret-right"></i>
+            <span>Persons</span>
+            <i class="fa-solid fa-caret-right"></i>
+            <span>Edit</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-container">
+
+    <a asp-controller="Persons" asp-action="Index" class="link-hover">Back to Persons List</a>
+
+    <h2 class="text-large">Edit Person</h2>
+
+    <form asp-action="edit" asp-controller="persons" method="post">
+
+        <input type="hidden" asp-for="PersonID" />
+        @*Person Name*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="PersonName" class="form-label pt">Person Name</label>
+            </div>
+            <div class="flex-1">
+                <input class="form-input" asp-for="PersonName" />
+                <span asp-validation-for="PersonName" class="text-red"></span>
+            </div>
+            @{
+                // for validation errors (Tag Helpers EX: asp-for) <span asp-validation-for="PersonName" class="text-red"></span>
+            }
+        </div>
+
+        @*Email*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="Email" class="form-label pt">Email</label>
+            </div>
+            <div class="flex-1">
+                @*by Default asp-for="Email" will make type="text" so to make it email (overWrite it by write type="email")*@
+                @*or by use attribute DataType(DataType.EmailAddress) in model or DTO (PersonAddRequest)*@
+                <input class="form-input" asp-for="Email" type="email" />
+                <span asp-validation-for="Email" class="text-red"></span>
+            </div>
+            @{
+                // for validation errors <span asp-validation-for="Email" class="text-red"></span>
+            }
+        </div>
+
+        @*DateOfBirth*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="DateOfBirth" class="form-label pt">Date of Birth</label>
+            </div>
+            <div class="flex-1">
+                @*like email*@
+                <input asp-for="DateOfBirth" class="form-input" />
+                <span asp-validation-for="DateOfBirth" class="text-red"></span>
+            </div>
+        </div>
+
+        @*Gender*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label class="form-label">Gender</label>
+            </div>
+            @*if input of type radio then all with same (name) only one can be selected *@
+            <div class="flex-1">
+                @{
+                    string[] genders = Enum.GetNames(typeof(GenderOptions));
+                }
+                @foreach (string gender in genders)
+                {
+                    <input type="radio" asp-for="Gender" value="@gender" class="ml" />
+                    <label for="@gender">@gender</label>
+                }
+                <span asp-validation-for="Gender" class="text-red"></span>
+            </div>
+        </div>
+
+        @*Country ID*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="CountryID" class="form-label">Country</label>
+            </div>
+            <div class="flex-1">
+                <select asp-for="CountryID" class="form-input" asp-items="@ViewBag.Countries">
+                    <option value="">Select Country</option>
+                </select>
+                <span asp-validation-for="CountryID" class="text-red"></span>
+            </div>
+        </div>
+
+        @*Address*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="Address" class="form-label pt">Address</label>
+            </div>
+            <div class="flex-1">
+                <textarea class="form-input" asp-for="Address"></textarea>
+                <span asp-validation-for="Address" class="text-red"></span>
+            </div>
+        </div>
+
+        @*Receiving News Letters*@
+        <div class="form-field flex">
+            <div class="w-25">
+            </div>
+            <div class="flex-1">
+                <input asp-for="ReciveNewsLetters" />
+                <label asp-for="ReciveNewsLetters" class="form-label">Receiving News Letters</label>
+                <span asp-validation-for="ReciveNewsLetters" class="text-red"></span>
+            </div>
+        </div>
+
+        @*Submit button*@
+        <div class="form-field flex">
+            <div class="w-25">
+            </div>
+            <div class="flex-1">
+                <button type="submit" class="button button-green-back">Update</button>
+                <div asp-validation-summary="All" class="text-red"></div>
+                @if (ViewBag.Errors != null)
+                {
+                    <div class="text-red ml">
+                        <ul>
+                            @foreach (string error in ViewBag.Errors)
+                            {
+                                <li class="ml">@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            asp-fallback-src="~/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"
+            asp-fallback-src="~/jquery.validate.min.js"
+            asp-fallback-test="window.jQuery.validator"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"
+            asp-fallback-src="~/jquery.validate.unobtrusive.min.js"
+            asp-fallback-test="window.jQuery.validator.unobstrusive"></script>
+}
+
+@*or use _validationScriptsPartial that include this scripts*@
+@{
+    // <partial name="_ValidationScriptsPartial" />
+    // @await Html.PartialAsync("_ValidationScriptsPartial")
+}

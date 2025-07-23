@@ -1,0 +1,72 @@
+﻿@model LoginDTO
+
+@{
+    ViewBag.Title = "Login";
+    ViewBag.CurrentUrl = "~/Account/Login";
+}
+
+<div class="text-grey">
+    <span>Contacts</span>
+    <i class="fa-solid fa-caret-right"></i>
+    <span>Login</span>
+</div>
+
+<div class="form-container">
+    Not yet Registered? <a asp-action="Register" asp-controller="Account" class="link-hover">Register</a>
+    <h2 class="text-large">Login</h2>
+
+    <form asp-action="Login" asp-controller="Account" method="post">
+
+        @*Email*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="Email" class="form-label pt">Email</label>
+            </div>
+            <div class="flex-1">
+                <input asp-for="Email" class="form-input" />
+                <span asp-validation-for="Email" class="text-red"></span>
+            </div>
+        </div>
+
+        @*Password*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="Password" class="form-label pt">Password</label>
+            </div>
+            <div class="flex-1">
+                <input asp-for="Password" class="form-input" />
+                <span asp-validation-for="Password" class="text-red"></span>
+            </div>
+        </div>
+
+        @*Register Button*@
+        <div class="form-field flex">
+            <div class="w-25"></div>
+            <div class="flex-1">
+                <button type="submit" class="button button-green-back">Login</button>
+
+                <div asp-validation-summary="All" class="text-red"></div>
+
+                @*Not Neccessary as we enable client side validations*@
+                @if (ViewBag.Errors != null)
+                {
+                    <div class="text-red ml">
+                        <ul>
+                            @foreach (var error in ViewBag.Errors)
+                            {
+                                <li class="ml">@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @* <partial name="_ValidationScriptsPartial" /> *@
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

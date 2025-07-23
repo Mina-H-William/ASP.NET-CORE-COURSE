@@ -5,30 +5,47 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/StyleSheet.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
-    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container">
-        <div class="navbar" style="display:flex;">
-            <div class="navbar-brand" style="display:flex;">
-                @*asp-append-version="true" it insure that when img change it will be updataed not used the cashed one*@
-                @*this by adding a hash code to the link of img /img?v={hash} and when img change the hash change so*@
-                @*cashed will not taken*@
-                <img src="~/logo.png" width="35px" asp-append-version="true" />
-            </div>
-            <ul>
-                <li>
-                    <a asp-action="index" asp-controller="persons">Persons</a>
-                    <a asp-action="UploadFromExcel" asp-controller="Countries">Upload Countries</a>
-                </li>
-            </ul>
-        </div>
         <div class="page-content">
-            @RenderBody()
+
+            <div class="margin-bottom">
+                <div class="flex" id="top-bar-div">
+                    <div class="flex-1" id="app-title-div">
+                        <h1 class="app-title">
+                            <i class="fa-solid fa-people-simple"></i>
+                            Contact Manager
+                        </h1>
+                    </div>
+                    <div class="flex-1 pr" id="search-box-div">
+                        <div class="navbar account-links">
+                            <ul>
+                                <li>
+                                    <a asp-action="Register" asp-controller="Account">Register</a>
+                                    <a asp-action="Login" asp-controller="Account">Login</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar mb">
+                <ul>
+                    <li>
+                        <a asp-action="index" asp-controller="persons">Persons</a>
+                        <a asp-action="UploadFromExcel" asp-controller="Countries">Upload Countries</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                @RenderBody()
+            </div>
         </div>
     </div>
-    @RenderSection("Scripts",false)
+    @RenderSection("Scripts", false)
 </body>
 </html>

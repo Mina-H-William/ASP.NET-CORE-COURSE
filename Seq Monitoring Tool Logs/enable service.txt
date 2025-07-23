@@ -1,0 +1,5 @@
+open services and search for Seq service and enable it 
+
+"i make it manual as i open it when i want to"
+
+default URL for seq -> localhost:5341/#/events

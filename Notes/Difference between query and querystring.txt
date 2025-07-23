@@ -1,0 +1,27 @@
+Request.QueryString
+Type: Microsoft.AspNetCore.Http.QueryString struct
+
+Represents: The complete query string portion of the URL (everything after the ?)
+
+Format: Raw string format including the leading ? (or empty if no query string)
+
+Example:
+
+// For URL: /products?category=electronics&page=2
+var queryString = context.Request.QueryString;
+// Value: "?category=electronics&page=2"
+
+
+
+Request.Query
+Type: Microsoft.AspNetCore.Http.IQueryCollection
+
+Represents: A parsed collection of key-value pairs from the query string
+
+Format: Dictionary-like collection that's already parsed and decoded
+
+Example:
+
+// For URL: /products?category=electronics&page=2
+var category = context.Request.Query["category"]; // "electronics"
+var page = context.Request.Query["page"]; // "2"

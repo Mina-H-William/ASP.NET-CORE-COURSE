@@ -1,0 +1,30 @@
+TempData:
+using the default session-based TempData provider or cookie-based TempData
+
+By default, ASP.NET Core stores TempData in server-side session storage, which requires:
+
+Session middleware (app.UseSession())
+
+Session configuration (AddSession()) 
+
+
+
+
+
+Feature		TempData				ViewBag / ViewData
+
+Lifespan	Survives redirects			Dies after current request
+Storage		Session or Cookies			In-memory (current request only)
+Usage		TempData["Key"]				ViewBag.Key / ViewData["Key"]
+Type Safety	Requires casting			ViewBag is dynamic
+Performance	Slightly slower (uses storage)		Faster (no persistence)
+
+
+
+Feature			ViewData			ViewBag
+
+Underlying Type		Dictionary<string, object>	Dynamic wrapper over ViewData
+Syntax			ViewData["Key"]			ViewBag.Key
+Type Safety		Requires explicit casting	Dynamic (no compile-time checks)
+Performance		Slightly faster (no dynamic)	Slower (dynamic resolution)
+IntelliSense		No (string keys)		No (dynamic properties)
