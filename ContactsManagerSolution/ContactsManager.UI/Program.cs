@@ -49,6 +49,13 @@ else
     app.UseExceptionHandlingMiddleware(); // Add custom exception handling middleware
 }
 
+if (app.Environment.IsProduction())
+{
+    app.UseHsts(); // Use HTTP Strict Transport Security (HSTS) in production, enforce all requests to use HTTPS
+}
+app.UseHttpsRedirection(); // Redirect HTTP requests to HTTPS
+
+
 app.UseSerilogRequestLogging(); // Add Serilog request logging middleware
 
 app.UseHttpLogging();
@@ -62,9 +69,22 @@ if (!app.Environment.IsEnvironment("Test"))
 
 app.UseStaticFiles();
 
-app.UseAuthentication(); // Add authentication middleware to the pipeline (Reading identity Cookie)
-
 app.UseRouting();
+
+app.UseAuthentication(); // Add authentication middleware to the pipeline (Reading identity Cookie)
+app.UseAuthorization(); // Add authorization middleware to the pipeline (Checking if user is authorized)
+
+// Conventional Routing using Top level statements to configure endpoints
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Persons}/{action=Index}/{id?}"
+//);
+
+// Conventional Routing For Areas
+//app.MapControllerRoute(
+//    name: "areas",
+//    pattern: "{area:exists}/{controller=Persons}/{action=Index}/{id?}" // :exists to make sure the area is real area.
+//);
 
 app.MapControllers();
 

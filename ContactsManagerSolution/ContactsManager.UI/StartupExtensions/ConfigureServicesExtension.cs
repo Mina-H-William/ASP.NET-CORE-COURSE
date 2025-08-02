@@ -1,8 +1,10 @@
 ﻿using ContactsManager.Core.Domain.IdentityEntities;
 using CRUDExample.Filters.ActionFilters;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using RepositoryContracts;
@@ -28,6 +30,12 @@ namespace CRUDExample
 
                 options.Filters.Add(new ResponseHeaderActionFilter(logger)
                 { key = "My-Key-From-Global", value = "My-Value-From-Global", Order = 2 });
+
+
+                // Add global filter to validate anti-forgery token for all POST requests
+                // if we use validateantiforgerytoken it will apply for all requests but GET requests should never modify data,
+                // so making CSRF protection unnecessary for get requests,so AutoValidateAntiforgeryTokenAttribute recommended
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
             services.AddScoped<IPersonsGetterService, PersonsGetterService>();
@@ -44,28 +52,47 @@ namespace CRUDExample
             services.AddTransient<PersonsListActionFilter>();
 
             if (!environment.IsEnvironment("Test"))
-            {
                 services.AddDbContext<ApplicationDbContext>(options =>
                         options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-                {
-                    options.Password.RequiredLength = 5; // minimum password length
-                    options.Password.RequireNonAlphanumeric = false; // allow passwords without special characters
-                    options.Password.RequireUppercase = false; // allow passwords without uppercase letters
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireDigit = false; // allow passwords without digits
-                    options.Password.RequiredUniqueChars = 3; // minimum number of unique characters in the password
-                })
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+            {
+                options.Password.RequiredLength = 5; // minimum password length
+                options.Password.RequireNonAlphanumeric = false; // allow passwords without special characters
+                options.Password.RequireUppercase = false; // allow passwords without uppercase letters
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = false; // allow passwords without digits
+                options.Password.RequiredUniqueChars = 3; // minimum number of unique characters in the password
+            })
                  .AddEntityFrameworkStores<ApplicationDbContext>()
                  .AddDefaultTokenProviders() // for password reset, email confirmation, etc.
                  .AddUserStore<UserStore<ApplicationUser, ApplicationRole, ApplicationDbContext, Guid>>()
                  .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>();
-                // not required to explicitly add Userstore and Rolestore as they are added by default
-                // unless we want to use custom UserStore or RoleStore
+            // not required to explicitly add Userstore and Rolestore as they are added by default
+            // unless we want to use custom UserStore or RoleStore
+            //AddIdentity() Automatically Calls AddAuthentication()
 
-                //AddIdentity() Automatically Calls AddAuthentication()
-            }
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                // enforces authorization for all endpoints by default
+                options.AddPolicy("NotAuthorized", policy =>
+                {
+                    policy.RequireAssertion(context =>
+                    {
+                        return !context.User.Identity?.IsAuthenticated ?? false;
+                    });
+                });
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // this the default value for pathes that are used by cookie authentication
+                // /Account/{action} action can be Login, Logout, AccessDenied, etc.
+                // so if you didn't specify these paths, they will be used by default
+                options.LoginPath = "/Account/Login"; // redirect to login page if user is not authenticated
+                options.AccessDeniedPath = "/Error"; // redirect to access denied page if user is authenticated but not authorized
+            });
 
             services.AddHttpLogging(options =>
             {

@@ -1,0 +1,16 @@
+To check for the exist one is valid or not run: 
+
+dotnet dev-certs https --check
+
+if valid it return valid if not so we should run:
+
+dotnet dev-certs https --clean 
+
+to remove the exist one and then run: 
+
+dotnet dev-certs https --trust
+
+to install new one and trust it  (Note: its valid for one year only)
+
+
+(Note: it valid only for development should use real certificate in production)

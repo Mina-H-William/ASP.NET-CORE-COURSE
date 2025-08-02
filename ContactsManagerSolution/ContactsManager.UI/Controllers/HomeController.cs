@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRUDExample.Controllers
@@ -11,6 +12,7 @@ namespace CRUDExample.Controllers
 
         }
 
+        [AllowAnonymous] // Allow anonymous access to all actions in this controller
         [Route("Error")]
         public IActionResult Error()
         {

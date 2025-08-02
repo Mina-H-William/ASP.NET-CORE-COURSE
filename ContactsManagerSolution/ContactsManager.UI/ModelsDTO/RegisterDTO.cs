@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ContactsManager.Core.Enums;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ContactsManager.UI.ModelsDTO
 {
@@ -10,6 +12,8 @@ namespace ContactsManager.UI.ModelsDTO
         [Required]
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
+        // for Remote validation. EX: check if email is already used or not
+        [Remote(action: "IsEmailAlreadyRegistered", controller: "Account", ErrorMessage = "Email is already used")]
         public string Email { get; set; }
 
         [Required]
@@ -25,5 +29,7 @@ namespace ContactsManager.UI.ModelsDTO
         [Compare("Password")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
+
+        public UserTypeOptions UserType { get; set; } = UserTypeOptions.User; // default user type is User
     }
 }

@@ -30,6 +30,12 @@
                                         <i class="fa-solid fa-user"></i>
                                         @User.Identity.Name
                                     </li>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li>
+                                            <a asp-action="Index" asp-controller="Home", asp-area="Admin">Admin</a>
+                                        </li>
+                                    }
                                     <li>
                                         <a asp-action="Logout" asp-controller="Account">Logout</a>
                                     </li>
@@ -67,32 +73,35 @@
                 </div>
             </div>
             <div class="navbar mb">
-                <ul>
-                    @if(ViewBag.CurrentUrl == "~/Persons/Index")
+                @if (User.Identity?.IsAuthenticated ?? false)
                     {
-                        <li>
-                            <a asp-action="index" asp-controller="persons" class="nav-active">Persons</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a asp-action="index" asp-controller="persons">Persons</a>
-                        </li>
-                    }
-                    @if(ViewBag.CurrentUrl == "~/Countries/UploadFromExcel")
-                    {
-                        <li>
-                            <a asp-action="UploadFromExcel" asp-controller="Countries" class="nav-active">Upload Countries</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a asp-action="UploadFromExcel" asp-controller="Countries">Upload Countries</a>
-                        </li>
-                    }
-                </ul>
+                    <ul>
+                        @if (ViewBag.CurrentUrl == "~/Persons/Index")
+                        {
+                            <li>
+                                <a asp-action="index" asp-controller="persons" class="nav-active">Persons</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a asp-action="index" asp-controller="persons">Persons</a>
+                            </li>
+                        }
+                        @if (ViewBag.CurrentUrl == "~/Countries/UploadFromExcel")
+                        {
+                            <li>
+                                <a asp-action="UploadFromExcel" asp-controller="Countries" class="nav-active">Upload Countries</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a asp-action="UploadFromExcel" asp-controller="Countries">Upload Countries</a>
+                            </li>
+                        }
+                    </ul>
+                }
             </div>
             <div class="body">
                 @RenderBody()
