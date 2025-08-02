@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CitiesManagerWebApi</name>
+    </assembly>
+    <members>
+        <member name="M:CitiesManagerWebApi.Controllers.v1.CitiesController.GetCities">
+            <summary>
+            To get list of cities (including city ID and city Name) from cities table in database.
+            </summary>
+            <returns>list of cities found in database</returns>
+        </member>
+        <member name="M:CitiesManagerWebApi.Controllers.v2.CitiesController.GetCities">
+            <summary>
+            To get list of cities (including city ID and city Name) from cities table in database.
+            </summary>
+            <returns>list of cities found in database</returns>
+        </member>
+    </members>
+</doc>
